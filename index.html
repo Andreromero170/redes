@@ -1,1 +1,163 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examen de Redes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            margin: 0;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 5px;
+        }
+        input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Examen de Redes</h1>
+
+    <form id="examForm">
+        <!-- Pregunta 1 -->
+        <div class="question">
+            <p><strong>1. Mencione las cuatro características de los medios de cobre (10 puntos)</strong></p>
+            <textarea name="pregunta1" id="pregunta1" required></textarea>
+        </div>
+
+        <!-- Pregunta 2 (modificada para selección múltiple) -->
+        <div class="question">
+            <p><strong>2. De las siguientes opciones, ¿cuáles son ventajas de la fibra óptica? (10 puntos)</strong></p>
+            <label><input type="checkbox" name="pregunta2" value="Inmune a las interferencias electromagnéticas"> Inmune a las interferencias electromagnéticas</label><br>
+            <label><input type="checkbox" name="pregunta2" value="Alta seguridad en las transmisiones"> Alta seguridad en las transmisiones</label><br>
+            <label><input type="checkbox" name="pregunta2" value="Económicos"> Económicos</label><br>
+            <label><input type="checkbox" name="pregunta2" value="Fácil de instalar"> Fácil de instalar</label>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="question">
+            <p><strong>3. Represente el stack del modelo OSI y describa los datos que maneja la capa física. (10 puntos)</strong></p>
+            <textarea name="pregunta3" id="pregunta3" required></textarea>
+        </div>
+
+        <!-- Pregunta 4 -->
+        <div class="question">
+            <p><strong>4. Mencione los rangos de direcciones de host para cada una de las clases A, B, C, D y E. (10 puntos)</strong></p>
+            <textarea name="pregunta4" id="pregunta4" required></textarea>
+        </div>
+
+        <!-- Pregunta 5 -->
+        <div class="question">
+            <p><strong>5. Explique con sus palabras qué es el DHCP. (10 puntos)</strong></p>
+            <textarea name="pregunta5" id="pregunta5" required></textarea>
+        </div>
+
+        <!-- Pregunta 6 -->
+        <div class="question">
+            <p><strong>6. ¿Cuál de las siguientes opciones NO es una desventaja o vulnerabilidad de los medios guiados? (10 puntos)</strong></p>
+            <label><input type="radio" name="pregunta6" value="Atenuación (mayor distancia menor fuerza de señal)" required> Atenuación (mayor distancia menor fuerza de señal)</label><br>
+            <label><input type="radio" name="pregunta6" value="Alto número de estaciones de trabajo por segmento"> Alto número de estaciones de trabajo por segmento</label><br>
+            <label><input type="radio" name="pregunta6" value="Diafonía o crosstalk"> Diafonía o crosstalk</label><br>
+            <label><input type="radio" name="pregunta6" value="Interferencia Electro Magnética (EMU)"> Interferencia Electro Magnética (EMU)</label>
+        </div>
+
+        <!-- Pregunta 7 -->
+        <div class="question">
+            <p><strong>7. Represente el stack del modelo OSI y describa una de sus capas. (10 puntos)</strong></p>
+            <textarea name="pregunta7" id="pregunta7" required></textarea>
+        </div>
+
+        <!-- Pregunta 8 -->
+        <div class="question">
+            <p><strong>8. Defina con sus palabras qué es y para qué sirve un Servidor DNS. (10 puntos)</strong></p>
+            <textarea name="pregunta8" id="pregunta8" required></textarea>
+        </div>
+
+        <input type="submit" value="Enviar Examen">
+    </form>
+
+    <div id="result" class="result"></div>
+
+    <script>
+        document.getElementById('examForm').onsubmit = function(event) {
+            event.preventDefault();
+            
+            let score = 0;
+            let resultText = '';
+
+            // Respuestas correctas
+            const correctAnswers = {
+                pregunta1: "Económicos,Fácil de instalar,Limitado por la distancia.,Limitado por interferencia de señal.",
+                pregunta2: ["Inmune a las interferencias electromagnéticas", "Alta seguridad en las transmisiones"],
+                pregunta3: "7 Aplicación\n6 Presentación\n5 Sesión\n4 Transporte\n3 Red\n2 Vínculo de datos/Enlace de Datos\n1 Física\nDatos que maneja la capa física: Bits de temporización y sincronización.",
+                pregunta4: "Clase A de 1.0.0.0 a 127.255.255.255\nClase B de 128.0.0.0 a 191.255.255.255\nClase C de 192.0.0.0 a 223.255.255.255\nClase D de 224.0.0. a 239.255.255.255\nClase E de 240.0.0.0 a 255.255.255.255.",
+                pregunta5: "DHCP (Protocolo de configuración dinámica de host) es un protocolo de red que permite a los clientes de una red IP obtener sus parámetros de configuración automáticamente.",
+                pregunta6: "Alto número de estaciones de trabajo por segmento",
+                pregunta7: "7 Aplicación Se compone de los servicios y aplicaciones de comunicación estándar que puede utilizar todo el mundo.",
+                pregunta8: "Un servidor DNS es un software que se encarga de traducir las direcciones IP a nombres de dominio. Cada dominio debe tener configurados unos servidores DNS, puesto que estos son los encargados de traducir los nombres de dominio o subdominios a su correspondiente dirección IP."
+            };
+
+            // Validar pregunta 1
+            if (document.getElementById('pregunta1').value.trim() === correctAnswers.pregunta1) score += 10;
+
+            // Validar pregunta 2 (Selección múltiple)
+            const selectedAnswers2 = Array.from(document.querySelectorAll('input[name="pregunta2"]:checked')).map(el => el.value);
+            if (selectedAnswers2.sort().toString() === correctAnswers.pregunta2.sort().toString()) score += 10;
+
+            // Validar pregunta 3
+            if (document.getElementById('pregunta3').value.trim() === correctAnswers.pregunta3) score += 10;
+
+            // Validar pregunta 4
+            if (document.getElementById('pregunta4').value.trim() === correctAnswers.pregunta4) score += 10;
+
+            // Validar pregunta 5
+            if (document.getElementById('pregunta5').value.trim() === correctAnswers.pregunta5) score += 10;
+
+            // Validar pregunta 6
+            if (document.querySelector('input[name="pregunta6"]:checked').value === correctAnswers.pregunta6) score += 10;
+
+            // Validar pregunta 7
+            if (document.getElementById('pregunta7').value.trim() === correctAnswers.pregunta7) score += 10;
+
+            // Validar pregunta 8
+            if (document.getElementById('pregunta8').value.trim() === correctAnswers.pregunta8) score += 10;
+
+            // Mostrar resultado
+            resultText = 'Puntaje Total: ' + score + ' de 80 puntos';
+            document.getElementById('result').textContent = resultText;
+        }
+    </script>
+
+</body>
+</html>
